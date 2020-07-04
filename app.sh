@@ -6,7 +6,7 @@ source ${APPROOT}/vendor/mo/mo
 
 # load controllers
 for SCRIPT in $(find ${APPROOT}/controller -name "*.sh"); do
-    source $SCRIPT
+  source $SCRIPT
 done
 
 source ${APPROOT}/route.sh
@@ -28,9 +28,15 @@ do
 done
 log debug "Received request."
 
-call_controller ${HTTP_METHOD} ${REQUEST_PATH}
+if [ "${HTTP_METHOD}" = "GET" ]; then
+  static_file_loader ${REQUEST_PATH}
+fi
+if [ -z "${RESPONSE_CODE}" ]; then
+  call_controller ${HTTP_METHOD} ${REQUEST_PATH}
+fi
+
 echo "HTTP/1.0 ${RESPONSE_CODE} ${RESPONSE_CODE_DESCRIPTION}"
+echo "Content-Type: ${CONTENT_TYPE}"
 echo
-echo ${_BODY}
-echo 
+echo -n ${RESPONSE_BODY}
 log debug "Responsed ${HTTP_RESPONSE}"
