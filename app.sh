@@ -38,5 +38,9 @@ fi
 echo "HTTP/1.0 ${RESPONSE_CODE} ${RESPONSE_CODE_DESCRIPTION}"
 echo "Content-Type: ${CONTENT_TYPE}"
 echo
-echo -n ${RESPONSE_BODY}
+if [ -n "$RESPONSE_FILE" ]; then
+  cat $RESPONSE_FILE
+else
+  echo -n ${RESPONSE_BODY}
+fi
 log debug "Responsed ${HTTP_RESPONSE}"

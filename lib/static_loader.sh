@@ -19,7 +19,7 @@ create_static_index
 static_file_loader() {
   declare -r KEY=$(echo ${1//_/__} | sed 's/\//_s/g' | sed 's/\./_d/g')
   if [ -n "$(eval echo '${'${KEY}'}')" ];then
-    RESPONSE_BODY=$(eval cat '${'${KEY}'}')
+    RESPONSE_FILE=$(eval echo '${'${KEY}'}')
     declare -r EXT=$(echo ${KEY##*_d} | tr '[a-z]' '[A-Z]')
     CONTENT_TYPE=$(eval echo '${'MIME_TYPE_${EXT}'}')
     RESPONSE_CODE=200
