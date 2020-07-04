@@ -1,3 +1,3 @@
 #!/bin/bash
 
-declare -r LOGLEVEL=INFO
+declare -r LOGLEVEL=DEBUG

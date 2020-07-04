@@ -16,7 +16,7 @@ INPUT=`echo ${INPUT} | tr -d "\r"`
 HTTP_METHOD=`echo ${INPUT} | cut -f 1 -d " " | tr '[a-z]' '[A-Z]'`
 REQUEST_PATH=`echo ${INPUT} | cut -f 2 -d " "`
 
-log info $INPUT
+log debug $INPUT
 while :
 do
   if [ -z "$INPUT" ]; then
@@ -24,12 +24,13 @@ do
   fi
   read INPUT
   INPUT=`echo ${INPUT} | tr -d "\r"`
-  log info $INPUT
+  log debug $INPUT
 done
-log info breaked
+log debug "Received request."
 
 call_controller ${HTTP_METHOD} ${REQUEST_PATH}
 echo "HTTP/1.0 ${RESPONSE_CODE} ${RESPONSE_CODE_DESCRIPTION}"
 echo
 echo ${_BODY}
 echo 
+log debug "Responsed ${HTTP_RESPONSE}"
