@@ -15,6 +15,6 @@ rip_show() {
 
 rip_create() {
   echo "${REQUEST_name}" >> ${APPROOT}/db/rip
-  NAME=${REQUEST_name}
+  declare -r NAME=${REQUEST_name}
   response
 }

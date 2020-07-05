@@ -12,10 +12,11 @@ done
 source ${APPROOT}/route.sh
 
 # parse HTTP request
+declare INPUT
 read INPUT
 INPUT=`echo ${INPUT} | tr -d "\r"`
-HTTP_METHOD=`echo ${INPUT} | cut -f 1 -d " " | tr '[a-z]' '[A-Z]'`
-REQUEST_PATH=`echo ${INPUT} | cut -f 2 -d " "`
+declare HTTP_METHOD=`echo ${INPUT} | cut -f 1 -d " " | tr '[a-z]' '[A-Z]'`
+declare REQUEST_PATH=`echo ${INPUT} | cut -f 2 -d " "`
 
 log debug $INPUT
 while :
@@ -25,13 +26,13 @@ do
   if [ -z "$INPUT" ]; then
     break
   fi
-  HEADER_KEY=$(echo ${INPUT} | cut -f 1 -d ":" | tr '[A-Z]' '[a-z]')
-  HEADER_VALUE=$(echo ${INPUT} | cut -f 2 -d ":" | sed 's/^ *//' )
+  declare HEADER_KEY=$(echo ${INPUT} | cut -f 1 -d ":" | tr '[A-Z]' '[a-z]')
+  declare HEADER_VALUE=$(echo ${INPUT} | cut -f 2 -d ":" | sed 's/^ *//' )
   if [ "${HEADER_KEY}" = "content-type" ]; then
-    REQUEST_CONTENT_TYPE=${HEADER_VALUE}
+    declare -r REQUEST_CONTENT_TYPE=${HEADER_VALUE}
   fi
   if [ "${HEADER_KEY}" = "content-length" ]; then
-    REQUEST_CONTENT_LENGTH=${HEADER_VALUE}
+    declare -r REQUEST_CONTENT_LENGTH=${HEADER_VALUE}
   fi
   log debug $INPUT
 done
