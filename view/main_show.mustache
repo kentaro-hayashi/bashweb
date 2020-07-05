@@ -1,8 +1,29 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>
+    Top Page
+  </title>
+</head>
 <body>
-Hello, {{NAME}}
+  <h1>Hello, {{NAME}}</h1>
 
-I hope your {{TIME_PERIOD}} was fun.
+  <form action="/rip" method="post">
+    <p>
+      名前：<input type="text" name="name">
+    </p>
+    <p>
+      メモ：<input type="text" name="memo">
+    </p>
+    <p>
+      <input type="submit" value="送信">
+      <input type="reset" value="リセット">
+    </p>
+  </form>
+  <p>
+    <a href="/rip">お名前リスト</a>
+  </p>
 </body>
 </html>

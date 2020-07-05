@@ -1,7 +1,6 @@
 #!/bin/bash
 
 main_show() {
-  NAME=Tyler
-  TIME_PERIOD=weekend
+  NAME=Kentaro
   response 200 main_show
 }
