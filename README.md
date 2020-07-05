@@ -52,17 +52,18 @@ route post /rip rip_create
 
 ### controller
 
-`/controller`配下に配置したシェルスクリプトはすべて読み込まれます。
-ここに定義した関数はrouting設定ファイルに従って呼ばれます。
-ファイル名はコントローラの動作に影響ありません。
+`/controller`配下に配置したシェルスクリプトはすべて読み込まれます。  
+ここに定義した関数はrouting設定ファイルに従って呼ばれます。  
+ファイル名はコントローラの動作に影響ありません。  
 定義する関数名は全体で一意にしてください。
 
-コントローラーの関数の最後では必ずresponse関数を呼び出してください。
+コントローラーの関数の最後では必ずresponse関数を呼び出してください。  
 response関数の書式は以下です。
 ```sh
 response [HTTP status] [view file name]
 ```
 引数はすべて省略可能です。（省略した場合は、 `[HTTP status]` : `200` 、 `[view file name]` : `関数名` と解釈されます）
+
 `[view file name]` には拡張子を含めないでください。
 
 #### example
@@ -81,9 +82,9 @@ rip_list() {
 
 ### view
 
-mustache形式でテンプレートを `/view` 配下に配置します。
-mustacheについては[こちら](https://mustache.github.io/)
-ここではcontrollerで定義済みの変数が全て使用できます。
+mustache形式でテンプレートを `/view` 配下に配置します。  
+mustacheについては[こちら](https://mustache.github.io/)  
+ここではcontrollerで定義済みの変数が全て使用できます。  
 bash3の制約により、連想配列は使用できません。
 
 尚、404.mustacheはrouting設定・静的ファイルのどちらにも該当するものがない場合に呼ばれるテンプレートです。
@@ -107,6 +108,6 @@ bash3の制約により、連想配列は使用できません。
 
 ### log
 
-`/log` 配下にログが吐き出されます。
-出力されるログレベルは、`DEBUG`、`INFO`、`WARN`、`ERROR`の4種類です。
+`/log` 配下にログが吐き出されます。  
+出力されるログレベルは、`DEBUG`、`INFO`、`WARN`、`ERROR`の4種類です。  
 `/config`でどのレベルのログを出力するか設定することができます。
