@@ -16,7 +16,7 @@
 - 同時アクセス
 
 ## 動作を確認した環境
-OS: Mac OS Catalina 10.15.5
+OS: Mac OS Catalina 10.15.5  
 Bash: GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin19)
 
 ## 準備
