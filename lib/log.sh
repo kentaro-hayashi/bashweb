@@ -24,6 +24,6 @@ log() {
   declare -r SHOW=$(eval echo '${'LOGLEVEL_${LOGLEVEL}_${TYPE}'}')
   if "${SHOW}"; then
     declare -r OUTTEXT=`echo $@ | sed "s/^$1/\[${TYPE}\] /"`
-    echo ${OUTTEXT} >> ${LOGFILE}
+    echo $(date -u "+%Y/%m/%dT%H:%M:%SZ") SESSION:${SESSION_ID} ${OUTTEXT} >> ${LOGFILE}
   fi
 }

@@ -1,4 +1,5 @@
 #!/bin/bash
+declare -r SESSION_ID=$RANDOM
 declare -r APPROOT=$(cd $(dirname $BASH_SOURCE); pwd)
 source ${APPROOT}/config.sh
 source ${APPROOT}/lib/index.sh
@@ -46,8 +47,9 @@ if [ "${HTTP_METHOD}" = "POST" -o "${HTTP_METHOD}" = "PUT" ]; then
   fi
 fi
 
-log debug "Received request."
+log info "Request received: ${HTTP_METHOD} ${REQUEST_PATH}"
 
+# routing
 if [ "${HTTP_METHOD}" = "GET" ]; then
   static_file_loader ${REQUEST_PATH}
 fi
@@ -55,6 +57,7 @@ if [ -z "${RESPONSE_CODE}" ]; then
   call_controller ${HTTP_METHOD} ${REQUEST_PATH}
 fi
 
+# send response
 echo "HTTP/1.0 ${RESPONSE_CODE} ${RESPONSE_CODE_DESCRIPTION}"
 echo "Content-Type: ${CONTENT_TYPE}"
 echo
@@ -63,4 +66,4 @@ if [ -n "$RESPONSE_FILE" ]; then
 else
   echo -n ${RESPONSE_BODY}
 fi
-log debug "Responsed ${HTTP_RESPONSE}"
+log info "Responsed ${RESPONSE_CODE} ${RESPONSE_CODE_DESCRIPTION}"
