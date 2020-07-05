@@ -5,14 +5,26 @@ SCRIPTDIR=$(cd $(dirname $BASH_SOURCE); pwd)
 
 case $1 in
 
+############################
+## Install Dependencies
+############################
   install)
     echo "Install dependencies..."
     mkdir -p ${SCRIPTDIR}/vendor/mo
     pushd ${SCRIPTDIR}/vendor/mo
-    wget https://raw.githubusercontent.com/tests-always-included/mo/master/mo
+
+    if [ ! -e "./mo" ]; then
+      wget https://raw.githubusercontent.com/tests-always-included/mo/master/mo
+    fi
     popd
+    mkdir -p ${SCRIPTDIR}/log
+    mkdir -p ${SCRIPTDIR}/db
+    echo "Install finished!"
     ;;
 
+############################
+## Start Server
+############################
   start)
     cat <<EOF
 🐠 bashweb server 🐠
@@ -27,6 +39,9 @@ EOF
     done
     ;;
 
+############################
+## HELP
+############################
   *)
     cat <<EOF
 🐠 bashweb server usage 🐠
